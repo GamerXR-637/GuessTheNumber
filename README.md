@@ -1,0 +1,2 @@
+# GuessTheNumber
+Free to use
