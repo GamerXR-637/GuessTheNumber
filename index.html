@@ -80,8 +80,8 @@
         startButton.addEventListener('click', () => {
             maxNumber = parseInt(maxNumberInput.value, 10);
     
-            if (isNaN(maxNumber) || maxNumber < 1) {
-                alert("Please enter a valid maximum number greater than 0.");
+            if (isNaN(maxNumber) || maxNumber < 3) {
+                alert("Please enter a valid maximum number greater than 0 and 3.");
                 return;
             }
     
