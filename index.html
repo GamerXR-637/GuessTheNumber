@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Number Guessing Game</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Add this line -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -47,6 +47,7 @@
             cursor: pointer;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
     <h1>Number Guessing Game</h1>
@@ -101,6 +102,12 @@
                 message.textContent = "Congratulations! You guessed the correct number!";
                 guessInput.disabled = true;
                 submitGuessButton.disabled = true;
+
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
             } else {
                 attempts--;
                 if (attempts > 0) {
@@ -112,7 +119,7 @@
                 }
             }
 
-            guessInput.value = ''; // Clear the input field
+            guessInput.value = '';
         });
     </script>
 </body>
