@@ -85,7 +85,7 @@
  
          const setupContainer = document.getElementById('setup-container');
          const startButton = document.getElementById('start-game');
-         const generateRandomButton = document.getElementById('generate-random'); // New button reference
+         const generateRandomButton = document.getElementById('generate-random');
          const gameContainer = document.getElementById('game-container');
          const message = document.getElementById('message');
          const guessInput = document.getElementById('guess-input');
@@ -152,6 +152,18 @@
                  handleGuess();
              }
          });
+
+         let visitCount = localStorage.getItem('visitCount');
+
+         if (!visitCount) {
+             visitCount = 1;
+         } else {
+             visitCount = parseInt(visitCount, 10) + 1;
+         }
+
+         localStorage.setItem('visitCount', visitCount);
+
+         document.body.insertAdjacentHTML('beforeend', `<p>You have visited this page ${visitCount} times.</p>`);
      </script>
      <footer style="position: fixed; bottom: 10px; width: 100%; text-align: center; color: #333;">
          <p>&copy; 2024 <a href="https://github.com/GamerXR-637/GuessTheNumber" style="color: #ffffff; text-decoration: none;">Number Guessing Game</a>. Free to use.</p>
