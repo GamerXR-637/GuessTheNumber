@@ -76,6 +76,7 @@
          <p id="message">Guess a number between 1 and <span id="max-number-display"></span>. You have <span id="attempts-display"></span> attempts.</p>
          <input type="number" id="guess-input" placeholder="Guess" min="1">
          <button id="submit-guess">Submit Guess</button>
+         <button id="restart-game" style="display: none;">Restart Game</button> <!-- New Restart Button -->
      </div>
  
      <script>
@@ -90,6 +91,7 @@
          const message = document.getElementById('message');
          const guessInput = document.getElementById('guess-input');
          const submitGuessButton = document.getElementById('submit-guess');
+         const restartGameButton = document.getElementById('restart-game'); // New Restart Button
          const maxNumberInput = document.getElementById('max-number');
          const maxNumberDisplay = document.getElementById('max-number-display');
          const attemptsDisplay = document.getElementById('attempts-display');
@@ -108,6 +110,10 @@
              attemptsDisplay.textContent = attempts;
              setupContainer.style.display = 'none';
              gameContainer.style.display = 'block';
+             restartGameButton.style.display = 'none'; // Hide restart button at the start
+             guessInput.disabled = false;
+             submitGuessButton.disabled = false;
+             message.textContent = `Guess a number between 1 and ${maxNumber}. You have ${attempts} attempts.`;
          });
  
          generateRandomButton.addEventListener('click', () => {
@@ -124,6 +130,7 @@
                  message.textContent = "Congratulations! You guessed the correct number!";
                  guessInput.disabled = true;
                  submitGuessButton.disabled = true;
+                 restartGameButton.style.display = 'inline-block'; // Show restart button
  
                  confetti({
                      particleCount: 100,
@@ -139,6 +146,7 @@
                      message.textContent = `Game over! The correct number was ${randomNumber}.`;
                      guessInput.disabled = true;
                      submitGuessButton.disabled = true;
+                     restartGameButton.style.display = 'inline-block'; // Show restart button
                  }
              }
  
@@ -151,6 +159,14 @@
              if (event.key === 'Enter') {
                  handleGuess();
              }
+         });
+
+         // Restart Game Button Event Listener
+         restartGameButton.addEventListener('click', () => {
+             setupContainer.style.display = 'block';
+             gameContainer.style.display = 'none';
+             maxNumberInput.value = '';
+             message.textContent = '';
          });
 
          let visitCount = localStorage.getItem('visitCount');
