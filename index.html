@@ -125,6 +125,25 @@
 
         submitGuessButton.addEventListener('click', handleGuess);
 
+    startButton.addEventListener('click', () => {
+    maxNumber = parseInt(maxNumberInput.value, 10);
+
+    if (isNaN(maxNumber) || maxNumber < 10 || maxNumber > 1000) {
+        alert("Please enter a valid maximum number between 10 and 1000.");
+        return;
+    }
+
+    // Generate a random number between 10 and 1000
+    randomNumber = Math.floor(Math.random() * (1000 - 10 + 1)) + 10;
+
+    attempts = Math.ceil(maxNumber / 4);
+    maxNumberDisplay.textContent = maxNumber;
+    attemptsDisplay.textContent = attempts;
+    setupContainer.style.display = 'none';
+    gameContainer.style.display = 'block';
+});
+
+        
         guessInput.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
                 handleGuess();
