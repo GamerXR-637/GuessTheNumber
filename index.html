@@ -149,17 +149,26 @@ padding = Math.floor(Math.random() * 3) - 1
                      origin: { y: 0.6 }
                  });
              } else {
-                 attempts--;
-                 if (attempts > 0) {
-                     const hint = userGuess > randomNumber ? "too high" : "too low";
-                     message.textContent = `Wrong guess! The number is ${hint}. You have ${attempts} attempts left to guess between 1 and ${maxNumber}.`;
-                 } else {
-                     message.textContent = `Game over! The correct number was ${randomNumber}.`;
-                     guessInput.disabled = true;
-                     submitGuessButton.disabled = true;
-                     restartGameButton.style.display = 'inline-block'; // Show restart button
-                 }
-             }
+    attempts--;
+    if (attempts > 0) {
+        // Define the chance to get a hint (e.g., 0.75 for 75%)
+        const hintChance = Math.floor(Math.random() * 100) / 100
+        let hintMessage = "No hint this time!"; // Default message
+
+        // Randomly decide whether to give the actual hint
+        if (Math.random() < hintChance) {
+            hintMessage = userGuess > randomNumber ? "The number is too high" : "The number is too low";
+        }
+
+        message.textContent = `Wrong guess! ${hintMessage}. You have ${attempts} attempts left to guess between 1 and ${maxNumber}.`;
+    } else {
+        message.textContent = `Game over! The correct number was ${randomNumber}.`;
+        guessInput.disabled = true;
+        submitGuessButton.disabled = true;
+        restartGameButton.style.display = 'inline-block'; // Show restart button
+    }
+}
+
  
              guessInput.value = '';
          };
