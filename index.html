@@ -107,9 +107,16 @@
                  alert("Please enter a valid maximum number between 10 and 1000.");
                  return;
              }
- 
-             randomNumber = Math.floor(Math.random() * maxNumber) + 1;
-             attempts = Math.ceil(maxNumber / 4);
+          let padding;
+if (Math.floor((maxNumber * .05)) <= 200 && Math.floor((maxNumber * .05)) >= 50) {
+padding = Math.floor(Math.random() * 10) + 2
+}
+else {
+padding = Math.floor(Math.random() * 3) - 1
+}
+  randomNumber = Math.floor(Math.random() * maxNumber) + 1;
+  attempts = Math.floor((maxNumber * .05) + padding / randomNumber + Math.floor(Math.random() * 3))
+  console.log(attempts)
              maxNumberDisplay.textContent = maxNumber;
              attemptsDisplay.textContent = attempts;
              setupContainer.style.display = 'none';
